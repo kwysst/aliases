@@ -1,0 +1,111 @@
+# ----------- ALIASES -------------
+alias c="clear"
+alias sudo="sudo "
+alias please="sudo "
+alias nano='nano --rcfile ~/.nanorc'
+alias rm="rm -I --preserve-root"
+
+alias zsh='nano ~/.zshrc'
+alias czsh='code ~/.zshrc'
+
+
+#####################################
+#
+#			System
+#
+	alias setvol='pactl set-sink-volume 0'
+	alias setvolume='pactl set-sink-volume 0'
+
+	alias pc_reboot='sudo /sbin/reboot'
+	alias pc_off='sudo /sbin/poweroff'
+	alias pc_halt='sudo /sbin/halt'
+	alias pc_shutdown='sudo /sbin/shutdown'
+
+	alias aptu="sudo apt update && sudo apt upgrade"
+
+	alias touchpad-enable="gsettings set org.gnome.desktop.peripherals.touchpad send-events 'enabled'"
+	alias touchpad-disable="gsettings set org.gnome.desktop.peripherals.touchpad send-events 'disabled'"
+
+	alias userbackup='sudo tar cvfz /backup.tar.gz /home/kwysst'
+#
+#####################################
+
+
+
+#####################################
+#
+#			Docker
+#
+	alias dkpsa='sudo docker ps -a'
+	alias dki='sudp docker images'
+	alias dkv='sudo docker volume'
+
+	alias dku='sudo docker comose up'
+	alias dkun='sudo docker compose build --no-cache && sudo docker compose up'
+	alias dkd='sudo docker compose down'
+	alias dkstop='sudo docker stop'
+	alias dkrm='sudo docker rm'
+	alias dkrmi='sudo docker rmi'
+
+	alias dksa='sudo docker stop $(sudo docker ps -qa)'
+	alias dkrma='sudo docker rm $(sudo docker ps -qa)'
+	alias dkrmia='sudo docker images prune'
+	alias dkrmva='sudo docker volume prune'
+
+	alias dksys='sudo docker system df'
+	alias dkclean='sudo docker system prune'
+#
+#####################################
+
+#####################################
+#
+#			git
+#
+	alias gita='git add .'
+	alias gitc='git commit -m'
+	alias gitcan='git commit --amend --no-edit'
+	alias gitp='git push'
+
+	alias gits='git status'
+	alias gitl='git log --oneline'
+	alias gitlg='git log --oneline --max-count=10'
+#
+#####################################
+
+
+#####################################
+#
+#			Bug fixes
+#
+	# for use this alias do sudo lspci, then find network device and 
+	# replace ADDRESS with 0X\:XX\:X
+	# address'd be at /sys/bus/pci/devices/
+  alias resetnet='
+      sudo echo 1 |
+      sudo tee /sys/bus/pci/devices/0000\:01\:00.0/remove &&
+      echo 1 |
+      sudo tee /sys/bus/pci/rescan
+  '
+
+	# https://itsfoss.com/fix-sound-ubuntu-1304-quick-tip/
+	alias resetsound='
+		killall pulseaudio &&
+		killall pulseaudio &&
+		sudo alsa force-reload sudo alsa force-reload
+	'
+#
+#####################################
+
+
+
+#####################################
+#
+#			Quick path access
+#
+	alias ..="cd ../"
+	alias ...="cd ../../"
+	alias ....="cd ../../../"
+
+	alias tmp='cd ~/tmp'
+#
+#####################################

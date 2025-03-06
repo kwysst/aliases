@@ -4,7 +4,7 @@ file="$1"  # Получаем имя файла в качестве аргуме
 
 if [ -z "$file" ]; then
   echo "Использование: $0 <имя_файла>"
-  file="~/.zshrc"
+  file="/home/kwysst/.zshrc"
 fi
 
 if [ ! -f "$file" ]; then
@@ -24,5 +24,14 @@ fi
 sed -i "${line_number},\$d" "$file"
 
 echo "Содержимое файла '$file' удалено после строки 'unalias -a'."
+
+if [ -f "aliases.txt" ]; then
+  cat "aliases.txt" >> "$file"
+  echo "Содержимое файла 'aliases.txt' добавлено в конец файла '$file'."
+  exit 0
+else
+  echo "Файл 'aliases.txt' не найден в текущей директории."
+  exit 1
+fi
 
 exit 0

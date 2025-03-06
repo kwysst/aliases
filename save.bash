@@ -1,0 +1,28 @@
+#!/bin/bash
+
+file="$1"  # Получаем имя файла в качестве аргумента
+
+if [ -z "$file" ]; then
+  echo "Использование: $0 <имя_файла>"
+  file="~/.zshrc"
+fi
+
+if [ ! -f "$file" ]; then
+  echo "Файл '$file' не существует."
+  exit 1
+fi
+
+# Находим номер строки, содержащей "unalias -a"
+line_number=$(grep -n "unalias -a" "$file" | cut -d ":" -f 1)
+
+if [ -z "$line_number" ]; then
+  echo "Строка 'unalias -a' не найдена в файле '$file'."
+  exit 1
+fi
+
+# Удаляем содержимое файла после указанной строки
+sed -i "${line_number},\$d" "$file"
+
+echo "Содержимое файла '$file' удалено после строки 'unalias -a'."
+
+exit 0

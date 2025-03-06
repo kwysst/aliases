@@ -1,3 +1,5 @@
+unalias -a
+
 # ----------- ALIASES -------------
 alias c="clear"
 alias sudo="sudo "
@@ -7,6 +9,21 @@ alias rm="rm -I --preserve-root"
 
 alias zsh='nano ~/.zshrc'
 alias czsh='code ~/.zshrc'
+
+#####################################
+#
+#			Work path access
+#
+	alias gosttm='cd ~/work/10.20.16.12/danil' 
+	alias gorostel='cd ~/work/10.20.16.8/danil'
+	alias gocdo='cd ~/mnt/ext4/citis/ercdo/danil/'
+	alias dirwatch='../sync-tools/dirwatch'
+	alias cdoup='goercdo && ../tools/s-ops up && goercdo && cd ./web/spa && yarn start'
+	alias cdodown='goercdo && ../tools/s-ops down'
+	alias cdopatchweb='../tools/s-ops patch-remote-web'
+#
+#####################################
+
 
 
 #####################################
@@ -80,12 +97,12 @@ alias czsh='code ~/.zshrc'
 	# for use this alias do sudo lspci, then find network device and 
 	# replace ADDRESS with 0X\:XX\:X
 	# address'd be at /sys/bus/pci/devices/
-  alias resetnet='
-      sudo echo 1 |
-      sudo tee /sys/bus/pci/devices/0000\:01\:00.0/remove &&
-      echo 1 |
-      sudo tee /sys/bus/pci/rescan
-  '
+  	alias resetnet='
+		sudo echo 1 |
+		sudo tee /sys/bus/pci/devices/0000\:01\:00.0/remove &&
+		echo 1 |
+		sudo tee /sys/bus/pci/rescan
+  	'
 
 	# https://itsfoss.com/fix-sound-ubuntu-1304-quick-tip/
 	alias resetsound='

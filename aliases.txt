@@ -19,9 +19,11 @@ unalias -a
 	alias gocdo='cd ~/mnt/ext4/citis/ercdo/danil/'
 
 	alias dirwatch='../sync-tools/dirwatch'
-	alias cdoup='gocdo && code . && ../tools/s-ops up && docker start d6f72c4b2424 && cd ./web/spa && yarn start'
-	alias cdodown='gocdo && ../tools/s-ops down && docker stop d6f72c4b2424'
-	alias cdopatchweb='gocdo && ../tools/s-ops patch-remote-web'
+	alias cdoup='gocdo && cdo-modified-yml && code . && ../tools/s-ops up && cd ./web/spa && yarn start'
+	alias cdodown='gocdo && ../tools/s-ops down'
+	alias cdo-stable-yml='gocdo && cp ~docker~/stable-compose.yml ./docker-compose.yml'
+	alias cdo-modified-yml='gocdo && cp ~docker~/modified-compose.yml ./docker-compose.yml'
+	alias cdopatchweb='gocdo && cdo-stable-yml && ../tools/s-ops patch-remote-web && cdo-modified-yml'
 #
 #####################################
 
@@ -55,7 +57,7 @@ unalias -a
 #			Docker
 #
 	alias dkpsa='sudo docker ps -a'
-	alias dkps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}" | (read -r; printf "%s\n" "$REPLY"; sort -k 3 )'
+	alias dkps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}" | (read -r; printf "%s\n" "$REPLY"; sort -k 2 )'
 	alias dki='sudp docker images'
 	alias dkv='sudo docker volume'
 

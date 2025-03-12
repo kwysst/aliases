@@ -17,9 +17,10 @@ unalias -a
 	alias gosttm='cd ~/work/10.20.16.12/danil' 
 	alias gorostel='cd ~/work/10.20.16.8/danil'
 	alias gocdo='cd ~/mnt/ext4/citis/ercdo/danil/'
+
 	alias dirwatch='../sync-tools/dirwatch'
-	alias cdoup='gocdo && ../tools/s-ops up && gocdo && cd ./web/spa && yarn start'
-	alias cdodown='gocdo && ../tools/s-ops down'
+	alias cdoup='gocdo && code . && ../tools/s-ops up && docker start d6f72c4b2424 && cd ./web/spa && yarn start'
+	alias cdodown='gocdo && ../tools/s-ops down && docker stop d6f72c4b2424'
 	alias cdopatchweb='gocdo && ../tools/s-ops patch-remote-web'
 #
 #####################################
@@ -54,6 +55,7 @@ unalias -a
 #			Docker
 #
 	alias dkpsa='sudo docker ps -a'
+	alias dkps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}" | (read -r; printf "%s\n" "$REPLY"; sort -k 3 )'
 	alias dki='sudp docker images'
 	alias dkv='sudo docker volume'
 

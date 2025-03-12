@@ -1,34 +1,36 @@
 #!/bin/bash
 
+RED='\e[31m'
+GREEN='\e[32m'
+RESET='\e[0m'
+
 file="$1"  # Получаем имя файла в качестве аргумента
 
 if [ -z "$file" ]; then
-  	echo "Использование: $0 <имя_файла>"
   	file="/home/kwysst/.zshrc"
 fi
 
 if [ ! -f "$file" ]; then
-  	echo "Файл '$file' не существует."
+  	echo -e "${RED}Error: '$file' не существует.${RESET}"
 	exit 1
 fi
 
-# Находим номер строки, содержащей "unalias -a"
 line_number=$(grep -n "unalias -a" "$file" | cut -d ":" -f 1)
 
 if [ -z "$line_number" ]; then
-  	echo "Строка 'unalias -a' не найдена в файле '$file'."
+  	echo -e "${GREEN}Предыдущих алиасов не существовало${RESET}"
 else
 	sed -i "${line_number},\$d" "$file"
-	echo "Содержимое файла '$file' удалено после строки 'unalias -a'."
+	echo -e "${GREEN}Предыдущие алиасы были удалены${RESET}"
 fi
 
 
 if [ -f "aliases.txt" ]; then
   	cat "aliases.txt" >> "$file"
-  	echo "Содержимое файла 'aliases.txt' добавлено в конец файла '$file'."
+  	echo -e "${GREEN}Алиасы добавлены${RESET}"
   	exit 0
 else
-  	echo "Файл 'aliases.txt' не найден в текущей директории."
+  	echo -e "${RED}Error: 'aliases.txt' не сущесвтует${RESET}"
   	exit 1
 fi
 
